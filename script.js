@@ -44,13 +44,18 @@ for (let customer of customers) {
     customerEmail.innerText = customer.email
     customerProfile.appendChild(customerEmail)
     
-    const customerAddress = customer.location.street + " " + customer.location.city + " " + customer.location.state + " " + customer.location.postcode
+    const fullAddress = document.createElement('div')
+    const customerAddress = customer.location.street.number + " " + customer.location.street.name 
+    const customerAddress2 = nameToAbbr(customer.location.state) + " " + customer.location.postcode
     customerAddress.innerHTML = `<h5>${customerAddress}</h5>`
+    customerAddress2.innerHTML = `<h5>${customerAddress2}</h5>`
+    fullAddress.innerHTML = customerAddress + " " + customerAddress2
+    insertionRoot.appendChild(fullAddress)
     // const address = document.createElement('h5')
     // customerProfile.appendChild(address)
     
     const customerDOB = document.createElement('h5')
-    customerDOB.innerText = customer.dob.date
+    customerDOB.innerText = moment(customer.dob.date).format("MMM DD, YYYY")            
     customerProfile.appendChild(customerDOB)
     console.log(customerDOB)
 
